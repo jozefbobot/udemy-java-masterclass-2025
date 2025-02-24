@@ -128,6 +128,8 @@ public class Main {
         //dvojrozmernePole();
 
         //Section 10: List, ArrayList, LinkedList, Iterator, Autoboxing
+        //arrayListZaciatok();
+        //arrayListOperacie();
 
         //Section 11: Abstraction in Java
 
@@ -172,7 +174,105 @@ public class Main {
     //↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ Section 13 ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
     //↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ Section 12 ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
     //↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ Section 11 ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
+
     //↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ Section 10 ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
+
+    public static void arrayListOperacie() {
+        ArrayList<String> arrayListZvierat = new ArrayList<>();
+        arrayListZvierat.add("pes");
+        arrayListZvierat.add("macka");
+        arrayListZvierat.add("ryba");
+        arrayListZvierat.add("orol");
+        arrayListZvierat.add("krava");
+        arrayListZvierat.add("tava");
+        arrayListZvierat.add("hroch");
+
+        System.out.println(arrayListZvierat);
+        System.out.println("Prve zviera je: " + arrayListZvierat.get(0));
+
+        if (arrayListZvierat.contains("macka")) System.out.println("Zoznam obsahuje macku");
+
+        arrayListZvierat.add("ryba");
+        System.out.println("Lev = " + arrayListZvierat.indexOf("lev"));
+        System.out.println("Prva ryba = " + arrayListZvierat.indexOf("ryba"));
+        System.out.println("Posledna ryba = " + arrayListZvierat.lastIndexOf("ryba"));
+
+        System.out.println(arrayListZvierat);
+        arrayListZvierat.remove(1);
+        System.out.println(arrayListZvierat);
+        arrayListZvierat.remove("ryba");
+        System.out.println(arrayListZvierat);
+
+        arrayListZvierat.removeAll(List.of("krava", "ryba"));
+        System.out.println(arrayListZvierat);
+
+        arrayListZvierat.retainAll(List.of("pes", "tava")); //vymaže všetko okrem pes a tava
+        System.out.println(arrayListZvierat);
+
+        arrayListZvierat.clear();
+        System.out.println(arrayListZvierat);
+        System.out.println("Je array list prazdny? - " + arrayListZvierat.isEmpty());
+
+        arrayListZvierat.addAll(List.of("pes", "macka", "ryba"));
+        arrayListZvierat.addAll(Arrays.asList("orol", "tava", "krava"));
+        System.out.println(arrayListZvierat);
+        arrayListZvierat.sort(Comparator.naturalOrder());
+        System.out.println(arrayListZvierat);
+        arrayListZvierat.sort(Comparator.reverseOrder());
+        System.out.println(arrayListZvierat);
+
+        var zvierataArray = arrayListZvierat.toArray(new String[arrayListZvierat.size()]);
+        System.out.println(Arrays.toString(zvierataArray));
+    }
+
+    public static void arrayListZaciatok() {
+        ArrayList rawList = new ArrayList(); //bez špecifického typu tzv. raw typ
+        rawList.add("Text");
+        rawList.add(100);
+        System.out.println("Raw ArrayList: " + rawList);
+
+        ArrayList<String> stringArrayList = new ArrayList<>();
+        //stringList.add(1); //nefunguje lebo pridavam integer do string arrayListu
+        stringArrayList.add("Ahoj");
+        stringArrayList.add("Svet");
+        stringArrayList.add("Volam");
+        stringArrayList.add("Sa");
+        stringArrayList.add("Jozo");
+        System.out.println(stringArrayList); //[Ahoj, Svet, Volam, Sa, Jozo]
+
+        stringArrayList.add(1, "Hello");
+        System.out.println(stringArrayList); //[Ahoj, Hello, Svet, Volam, Sa, Jozo]
+
+        stringArrayList.set(0, "Hola");
+        System.out.println(stringArrayList); //[Hola, Hello, Svet, Volam, Sa, Jozo]
+
+        stringArrayList.remove(1);
+        System.out.println(stringArrayList); //[Hola, Svet, Volam, Sa, Jozo]
+
+        String[] veci = {"jablka", "banany", "mlieko", "vajicka"};
+        List<String> zoznam = List.of(veci);
+        System.out.println(zoznam);
+        System.out.println(zoznam.getClass().getName()); //nemenna list
+
+        ArrayList<String> nakupnyZoznam = new ArrayList<>(zoznam);
+        nakupnyZoznam.add("jogurt");
+        System.out.println(nakupnyZoznam);
+
+        ArrayList<String> dalsiNakupnyZoznam = new ArrayList<>(
+                List.of("uhorky", "horcica", "syr")
+        );
+        System.out.println(dalsiNakupnyZoznam);
+
+        nakupnyZoznam.addAll(dalsiNakupnyZoznam);
+        System.out.println(nakupnyZoznam);
+
+        /*
+        ArrayList<Person> personList = new ArrayList<>(); //Array list objektov
+        personList.add(new Person("Ján", 25));
+        personList.add(new Person("Mária", 30));
+        System.out.println("ArrayList s osobami: " + personList);
+        */
+    }
 
     //↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ Section 9 ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
 
